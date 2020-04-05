@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  res.send('OK');;
 });
 
 Object.keys(routes).forEach(function(routeName) {
