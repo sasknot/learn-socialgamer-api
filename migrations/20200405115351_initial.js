@@ -11,7 +11,7 @@ exports.up = function(knex) {
   .then(function() {
     return knex.schema.createTable('user', function(table) {
       table.increments('id');
-      table.integer('avatar').references('id').inTable('medias').notNullable();
+      table.integer('avatar').references('id').inTable('media').notNullable();
       table.string('name', 150).notNullable();
       table.string('email', 150).notNullable();
       table.string('password', 100).notNullable();
@@ -24,8 +24,8 @@ exports.up = function(knex) {
   .then(function() {
     return knex.schema.createTable('user_friends', function(table) {
       table.increments('id');
-      table.integer('user').references('id').inTable('users').notNullable();
-      table.integer('friend').references('id').inTable('users').notNullable();
+      table.integer('user').references('id').inTable('user').notNullable();
+      table.integer('friend').references('id').inTable('user').notNullable();
       table.string('status', 10).notNullable().defaultTo('pending');
       table.timestamps();
     });
@@ -42,7 +42,7 @@ exports.up = function(knex) {
   .then(function() {
     return knex.schema.createTable('game', function(table) {
       table.increments('id');
-      table.integer('cover').references('id').inTable('medias').notNullable();
+      table.integer('cover').references('id').inTable('media').notNullable();
       table.string('name', 150).notNullable();
       table.date('release_date');
       table.text('description');
@@ -52,16 +52,16 @@ exports.up = function(knex) {
   .then(function() {
     return knex.schema.createTable('game_consoles', function(table) {
       table.increments('id');
-      table.integer('game').references('id').inTable('games').notNullable();
-      table.integer('console').references('id').inTable('consoles').notNullable();
+      table.integer('game').references('id').inTable('game').notNullable();
+      table.integer('console').references('id').inTable('console').notNullable();
       table.timestamps();
     });
   })
   .then(function() {
     return knex.schema.createTable('game_rating', function(table) {
       table.increments('id');
-      table.integer('user').references('id').inTable('users').notNullable();
-      table.integer('game').references('id').inTable('games').notNullable();
+      table.integer('user').references('id').inTable('user').notNullable();
+      table.integer('game').references('id').inTable('game').notNullable();
       table.integer('number').notNullable();
       table.timestamps();
     });
