@@ -5,6 +5,9 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Routes
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
@@ -20,6 +23,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   err.url = req.originalUrl;
   err.params = req.params;
+  err.body = req.body;
 
   next(err);
 });
