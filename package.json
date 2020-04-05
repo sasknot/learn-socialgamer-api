@@ -1,0 +1,16 @@
+{
+  "name": "learn-socialgamer-api",
+  "version": "0.0.0",
+  "description": "Learn Social Gamer API",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sasknot/learn-socialgamer-api.git"
+  },
+  "author": "Rafael Silva <rafaelfsilva1@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/sasknot/learn-socialgamer-api#readme",
+}
