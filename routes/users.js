@@ -1,12 +1,13 @@
 const express = require('express');
+const knex = require('../services/knex');
+
 const router = express.Router();
 
 router.get('/', function(req, res) {
-  res.json([
-    { id: 1, username: 'oi', password: 'ola' },
-    { id: 2, username: 'natan', password: 'natan2' },
-    { id: 3, username: 'rafael', password: 'rafael2' }
-  ]);
+  knex.from('user')
+  .then(function(response) {
+    res.json(response);
+  });
 });
 
 router.post('/', function(req, res) {
@@ -14,9 +15,10 @@ router.post('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-  res.json({
-    id: req.params.id
-  })
+  knex.from('user').where('id', req.params.id)
+  .then(function(response) {
+    res.json(response);
+  });
 });
 
 router.put('/:id', function(req, res) {
