@@ -2,30 +2,51 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', function(req, res) {
-  knex.from('console')
-  .then(function(response) {
-    res.json(response);
+  knex('console')
+  .then(function(consoles) {
+    res.json(consoles);
   });
 });
 
 router.post('/', function(req, res) {
-  // insert
-  res.send('OK')
+  knex('console')
+  .insert(req.body)
+  .then(function(ids) {
+    return knex('console').where('id', ids[0]);
+  })
+  .then(function(console) {
+    res.json(console);
+  });
 });
 
 router.get('/:id', function(req, res) {
-  // select by id
-  res.send('OK')
+  knex('console')
+  .where('id', req.params.id)
+  .then(function(console) {
+    res.json(console);
+  });
 });
 
 router.put('/:id', function(req, res) {
-  // update
-  res.send('OK')
+  knex('console')
+  .where('id', req.params.id)
+  .update(req.body)
+  .then(function(id) {
+    return knex('console').where('id', id);
+  })
+  .then(function(console) {
+    res.json(console);
+  });
 });
 
 router.get('/:id/games', function(req, res) {
-  // console games
-  res.send('OK')
+  knex('game_consoles')
+  .where('console', req.params.id)
+  .innerJoin('console', 'console.id', 'game_consoles.console')
+  .innerJoin('game', 'game.id', 'game_consoles.game')
+  .then(function(games) {
+    res.json(games);
+  });
 });
 
 module.exports = router;

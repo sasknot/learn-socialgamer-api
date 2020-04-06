@@ -20,7 +20,7 @@ router.post('/', function(req, res) {
   })
   .then(function(user) {
     res.json(user);
-  })
+  });
 });
 
 // Get by id
@@ -42,7 +42,7 @@ router.post('/:id', function(req, res) {
   })
   .then(function(user) {
     res.json(user);
-  })
+  });
 });
 
 // Get all games by user id
