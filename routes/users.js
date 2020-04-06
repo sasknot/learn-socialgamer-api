@@ -3,7 +3,28 @@ const knex = require('../services/knex');
 
 const router = express.Router();
 
-// Get all
+/**
+ * @api {get} /users Get all users information
+ * @apiName GetUser
+ * @apiGroup User
+ *
+ * @apiSuccess {Object[]} Users
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [
+ *       {
+ *         "id": 1,
+ *         "name": "John Doe",
+ *         "email": "john.doe@email.com"
+ *       },
+ *       {
+ *         "id": 2,
+ *         "name": "John Doe 2",
+ *         "email": "john.doe2@email.com"
+ *       }
+ *     ]
+ */
 router.get('/', function(req, res) {
   knex('user')
   .then(function(users) {

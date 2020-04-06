@@ -17,3 +17,8 @@
 
 1. Execute `npm start`
 2. API will be at http://localhost:8000
+
+
+## API Documentation
+
+It can be seen [here](http://sasknot.github.io/learn-socialgamer-api/)
