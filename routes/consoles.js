@@ -1,52 +1,41 @@
 const express = require('express');
+const { ConsoleModel, ConsoleCollection } = require('../models/console');
+
 const router = express.Router();
 
-router.get('/', function(req, res) {
-  knex('console')
-  .then(function(consoles) {
-    res.json(consoles);
-  });
+router.get('/', async function(req, res) {
+  const result = await ConsoleCollection.findWithPaging({ page: 1, pageSize: 10 })
+  const output = result.outputWithPaging()
+
+  res.json(output)
 });
 
-router.post('/', function(req, res) {
-  knex('console')
-  .insert(req.body)
-  .then(function(ids) {
-    return knex('console').where('id', ids[0]);
-  })
-  .then(function(console) {
-    res.json(console);
-  });
+router.get('/:id', async function(req, res) {
+  const result = await ConsoleModel.find({ id: req.params.id })
+  const output = result.output()
+
+  res.json(output)
 });
 
-router.get('/:id', function(req, res) {
-  knex('console')
-  .where('id', req.params.id)
-  .then(function(console) {
-    res.json(console);
-  });
+router.post('/', async function(req, res) {
+  const result = await ConsoleModel.forge().save(req.body)
+  const output = result.output()
+
+  res.json(output)
 });
 
-router.put('/:id', function(req, res) {
-  knex('console')
-  .where('id', req.params.id)
-  .update(req.body)
-  .then(function(id) {
-    return knex('console').where('id', id);
-  })
-  .then(function(console) {
-    res.json(console);
-  });
+router.post('/:id', async function(req, res) {
+  const result = await ConsoleModel.forge({ id: req.params.id }).save(req.body)
+  const output = result.output()
+
+  res.json(output)
 });
 
-router.get('/:id/games', function(req, res) {
-  knex('game_consoles')
-  .where('console', req.params.id)
-  .innerJoin('console', 'console.id', 'game_consoles.console')
-  .innerJoin('game', 'game.id', 'game_consoles.game')
-  .then(function(games) {
-    res.json(games);
-  });
+router.delete('/:id', async function(req, res) {
+  const result = await ConsoleModel.forge({ id: req.params.id }).destroy()
+  const output = result.output()
+
+  res.json(output)
 });
 
 module.exports = router;

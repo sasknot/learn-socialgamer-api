@@ -1,5 +1,5 @@
 const express = require('express');
-const knex = require('../services/knex');
+const { UserModel, UserCollection } = require('../models/user');
 
 const router = express.Router();
 
@@ -36,15 +36,42 @@ const router = express.Router();
  *       }
  *     ]
  */
-router.get('/', function(req, res) {
-  knex('user')
-  .then(function(users) {
-    res.json(users);
-  });
+router.get('/', async function(req, res) {
+  const result = await UserCollection.findWithPaging({ page: 1, pageSize: 10 })
+  const output = result.outputWithPaging()
+
+  res.json(output)
 });
 
 /**
- * @api {post} /users Insert multiple
+ * @api {get} /users/:id Get a single
+ * @apiGroup User
+ * @apiParam {Number} id User unique ID
+ *
+ * @apiSuccessExample Response
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "id": 3,
+ *       "avatar": null,
+ *       "name": "Karen Eliot",
+ *       "email": "karen.eliot@email.com",
+ *       "password": "123",
+ *       "birthday": "1996-01-01",
+ *       "location": "NY",
+ *       "description": null,
+ *       "created_at": "2020-04-06 18:00:00",
+ *       "updated_at": "2020-04-06 18:00:00",
+ *     }
+ */
+router.get('/:id', async function(req, res) {
+  const result = await UserModel.find({ id: req.params.id })
+  const output = result.output()
+
+  res.json(output)
+});
+
+/**
+ * @api {post} /users Insert a single
  * @apiGroup User
  * @apiParam (Request Body) {json} User User fields (not all fields are mandatory)
  * @apiParamExample {json} Example
@@ -71,43 +98,11 @@ router.get('/', function(req, res) {
  *       "updated_at": "2020-04-06 18:00:00",
  *     }
  */
-router.post('/', function(req, res) {
-  knex('user')
-  .insert(req.body)
-  .then(function(ids) {
-    return knex('user').where('id', ids[0]);
-  })
-  .then(function(user) {
-    res.json(user);
-  });
-});
+router.post('/', async function(req, res) {
+  const result = await UserModel.forge().save(req.body)
+  const output = result.output()
 
-/**
- * @api {get} /users/:id Get a single
- * @apiGroup User
- * @apiParam {Number} id User unique ID
- *
- * @apiSuccessExample Response
- *     HTTP/1.1 200 OK
- *     {
- *       "id": 3,
- *       "avatar": null,
- *       "name": "Karen Eliot",
- *       "email": "karen.eliot@email.com",
- *       "password": "123",
- *       "birthday": "1996-01-01",
- *       "location": "NY",
- *       "description": null,
- *       "created_at": "2020-04-06 18:00:00",
- *       "updated_at": "2020-04-06 18:00:00",
- *     }
- */
-router.get('/:id', function(req, res) {
-  knex('user')
-  .where('id', req.params.id)
-  .then(function(user) {
-    res.json(user);
-  });
+  res.json(output)
 });
 
 /**
@@ -136,16 +131,11 @@ router.get('/:id', function(req, res) {
  *       "updated_at": "2020-04-06 18:00:00",
  *     }
  */
-router.post('/:id', function(req, res) {
-  knex('user')
-  .where('id', req.params.id)
-  .update(req.body)
-  .then(function(id) {
-    return knex('user').where('id', id);
-  })
-  .then(function(user) {
-    res.json(user);
-  });
+router.post('/:id', async function(req, res) {
+  const result = await UserModel.forge({ id: req.params.id }).save(req.body)
+  const output = result.output()
+
+  res.json(output)
 });
 
 /**
@@ -159,35 +149,11 @@ router.post('/:id', function(req, res) {
  *       3
  *     ]
  */
-router.delete('/:id', function(req, res) {
-  knex('user')
-  .where('id', req.params.id)
-  .delete()
-  .then(function(id) {
-    res.json(id);
-  });
-});
+router.delete('/:id', async function(req, res) {
+  const result = await UserModel.forge({ id: req.params.id }).destroy()
+  const output = result.output()
 
-// Get all games by user id
-router.get('/:id/games', function(req, res) {
-  knex('user_games')
-  .where('user', req.params.id)
-  .innerJoin('user', 'user.id', 'user_games.user')
-  .innerJoin('game', 'game.id', 'user_games.game')
-  .then(function(user) {
-    res.json(user);
-  });
-});
-
-// Get all consoles by user id
-router.get('/:id/consoles', function(req, res) {
-  knex('user_consoles')
-  .where('user', req.params.id)
-  .innerJoin('user', 'user.id', 'user_consoles.user')
-  .innerJoin('console', 'console.id', 'user_consoles.console')
-  .then(function(user) {
-    res.json(user);
-  });
+  res.json(output)
 });
 
 module.exports = router;
