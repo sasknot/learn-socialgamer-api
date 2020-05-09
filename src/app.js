@@ -1,7 +1,9 @@
-const routes = require('./routes');
+// const routes = require('./routes');
 
 const path = require('path');
 const express = require('express');
+const { loadFiles: graphQLFileLoading } = require('@graphql-toolkit/file-loading')
+const { ApolloServer } = require('apollo-server-express');
 
 const app = express();
 
@@ -9,13 +11,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.get('/', function(req, res) {
-  res.send('OK');;
+// app.get('/', function(req, res) {
+//   res.send('OK');;
+// });
+
+// Object.keys(routes).forEach(function(routeName) {
+//   app.use('/' + routeName, routes[routeName])
+// });
+
+const typeDefs = graphQLFileLoading(path.join(__dirname, 'schemas', '**/*.graphql'));
+const resolvers = graphQLFileLoading(path.join(__dirname, 'resolvers', '**/*.js'));
+// const context = () => {
+// }
+
+const graphQLServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  // context
 });
 
-Object.keys(routes).forEach(function(routeName) {
-  app.use('/' + routeName, routes[routeName])
-});
+app.use(graphQLServer.getMiddleware())
 
 // If no route was found, sends 404 to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,11 @@
+type Paging {
+  page: Int!
+  pageSize: Int!
+}
+
+scalar Date
+
+type Query {
+  userList(page: Int, pageSize: Int, filters: UserListFilters): UserList!
+  userGet(id: ID): User
+}

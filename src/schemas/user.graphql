@@ -1,0 +1,22 @@
+input UserListFilters {
+  keyword: String
+}
+
+
+type UserList {
+  list: [User!]!
+  paging: Paging
+}
+
+type User {
+  id: ID!
+  avatar: Int
+  name: String!
+  email: String!
+  password: String
+  birthday: Date!
+  location: String
+  description: String
+  created_at: Date
+  updated_at: Date
+}
