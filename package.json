@@ -7,7 +7,7 @@
     "start": "npx pm2 start ./server.js --name socialgamer-api --watch",
     "stop": "npx pm2 stop socialgamer-api",
     "docs": "npx apidoc -i routes/ -o docs/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test npx jest"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,16 @@
     "bookshelf": "^1.1.1",
     "express": "^4.17.1",
     "knex": "^0.20.13",
-    "pm2": "^4.2.3",
+    "pm2": "^4.4.0",
     "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "jest": {
+    "verbose": true,
+    "testMatch": [
+      "<rootDir>/tests/**/*_test.js"
+    ]
   }
 }

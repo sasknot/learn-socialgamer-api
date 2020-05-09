@@ -1,6 +1,6 @@
-const db = require('../services/db')
+const database = require('../services/database')
 
-const CommomModel = db.Model.extend({
+const CommomModel = database.Model.extend({
   hasTimestamps: true,
 
   output (omitPivot=true) {
@@ -16,10 +16,16 @@ const CommomModel = db.Model.extend({
     .forge()
     .where(where)
     .fetch({ withRelated: ['games', 'consoles'] })
+  },
+
+  async findLastId () {
+    const result = await this.forge().orderBy('id', 'desc').fetch()
+
+    return result.id
   }
 })
 
-const CommomCollection = db.Collection.extend({
+const CommomCollection = database.Collection.extend({
   outputWithPaging (omitPivot=true) {
     return {
       rows: this.serialize({ omitPivot }),
