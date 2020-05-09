@@ -4,8 +4,10 @@
 
 * ExpressJS 4.17
 * KnexJS 0.20
+* Bookshelf 1.1
 * SQLite3 4.1
-* PM2 4.2 (for serving continuously)
+* PM2 4.4 (for serving continuously)
+* Jest
 
 ## Install
 
@@ -18,6 +20,9 @@
 1. Execute `npm start`
 2. API will be at http://localhost:8000
 
+## Tests
+
+1. Execute `npm test`
 
 ## API Documentation
 
