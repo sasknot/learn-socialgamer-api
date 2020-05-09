@@ -1,4 +1,4 @@
-const database = require('../services/database')
+const database = require('../src/services/database')
 
 const syncDatabase = async () => {
   await database.knex.migrate.latest()

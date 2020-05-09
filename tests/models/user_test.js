@@ -1,5 +1,5 @@
 const helper = require('../helper')
-const { UserModel } = require('../../models/user')
+const { UserModel } = require('../../src/models/user')
 
 beforeAll(async () => {
   await helper.syncDatabase()

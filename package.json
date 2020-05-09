@@ -4,9 +4,9 @@
   "description": "Learn Social Gamer API",
   "private": true,
   "scripts": {
-    "start": "npx pm2 start ./server.js --name socialgamer-api --watch",
+    "start": "npx pm2 start ./src/server.js --name socialgamer-api --watch",
     "stop": "npx pm2 stop socialgamer-api",
-    "docs": "npx apidoc -i routes/ -o docs/",
+    "docs": "npx apidoc -i src/routes/ -o docs/",
     "test": "NODE_ENV=test npx jest"
   },
   "repository": {
