@@ -31,4 +31,10 @@ It can be seen [here](http://sasknot.github.io/learn-socialgamer-api/)
 
 ## TODO
 
-* Add GraphQL
+* Add more GraphQL schemas and queries
+* Add tests for GraphQL queries
+* Persist relationships
+* Persist game rating
+* Persist media
+* Change apiDoc to JSDoc
+* Should still use `routes`?
