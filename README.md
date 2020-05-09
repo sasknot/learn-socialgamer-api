@@ -27,3 +27,8 @@
 ## API Documentation
 
 It can be seen [here](http://sasknot.github.io/learn-socialgamer-api/)
+
+
+## TODO
+
+* Add GraphQL

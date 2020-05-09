@@ -8,12 +8,12 @@ beforeAll(async () => {
 describe('models/user', () => {
   test('insert', async () => {
     const data = {
-      name: "John Doe",
-      email: "john.doe@gmail.com",
+      name: "Netochka Nezvanova",
+      email: "netochka.nezvanova@gmail.com",
       password: "123456",
-      birthday: "1990-01-01",
-      location: "California",
-      description: "Hi, I'm John Doe! Nice to meet you"
+      birthday: "1988-01-01",
+      location: "Europe",
+      description: "Hello"
     }
     const result = await UserModel.forge().save(data)
     const output = result.output()
@@ -24,10 +24,10 @@ describe('models/user', () => {
   })
 
   test('update', async () => {
-    const result = await UserModel.forge({ id: 1 }).save({ name: 'Monty Python' })
+    const result = await UserModel.forge({ id: 1 }).save({ name: 'Luther Blissett' })
     const output = result.output()
 
-    expect(output.name).toEqual('Monty Python')
+    expect(output.name).toEqual('Luther Blissett')
   })
 
   test('destroy', async () => {
@@ -49,7 +49,7 @@ describe('models/user', () => {
   test('not update', async () => {
     const lastId = await UserModel.findLastId()
     const result = async () => {
-      await UserModel.forge({ id: (lastId+1) }).save({ name: 'Monty Python' })
+      await UserModel.forge({ id: (lastId+1) }).save({ name: 'Luther Blissett' })
     }
 
     expect(result).rejects.toThrow(UserModel.NoRowsUpdatedError)
