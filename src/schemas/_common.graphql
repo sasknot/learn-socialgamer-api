@@ -1,0 +1,25 @@
+type Paging {
+  page: Int!
+  pageSize: Int!
+}
+
+scalar Date
+
+type Query {
+  userList(page: Int, pageSize: Int, filters: UserListFilters): UserList!
+  userGet(id: ID): User
+
+  gameList(page: Int, pageSize: Int, filters: GameListFilters): GameList!
+  gameGet(id: ID): Game
+
+  consoleList(page: Int, pageSize: Int, filters: ConsoleListFilters): ConsoleList!
+  consoleGet(id: ID): Console
+}
+
+type Mutation {
+  userInsert()
+  userUpdate()
+  userDestroy(id: ID)
+
+
+}

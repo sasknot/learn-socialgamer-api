@@ -1,6 +1,6 @@
 const database = require('../services/database')
 
-const CommomModel = database.Model.extend({
+const CommonModel = database.Model.extend({
   hasTimestamps: true,
 
   output (omitPivot=true) {
@@ -25,7 +25,7 @@ const CommomModel = database.Model.extend({
   }
 })
 
-const CommomCollection = database.Collection.extend({
+const CommonCollection = database.Collection.extend({
   outputWithPaging (omitPivot=true) {
     return {
       rows: this.serialize({ omitPivot }),
@@ -47,6 +47,6 @@ const CommomCollection = database.Collection.extend({
 })
 
 module.exports = {
-  CommomModel,
-  CommomCollection
+  CommonModel,
+  CommonCollection
 }

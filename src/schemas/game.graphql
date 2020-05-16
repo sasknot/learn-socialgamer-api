@@ -1,0 +1,42 @@
+input GameListFilters {
+  keyword: String
+}
+
+
+type GameList {
+  rows: [Game!]!
+  paging: Paging
+}
+
+type Game {
+  id: ID!
+  cover: Media
+  name: String!
+  release_date: Date
+  description: String
+  created_at: Date
+  updated_at: Date
+
+  ratings: [GameRating!]
+  comments: [GameComment!]
+  consoles: [Console!]
+  users: [User!]
+}
+
+type GameRating {
+  id: ID!
+  user: User!
+  game: Game!
+  number: Int!
+  created_at: Date
+  updated_at: Date
+}
+
+type GameComment {
+  id: ID!
+  user: User!
+  game: Game!
+  message: String!
+  created_at: Date
+  updated_at: Date
+}

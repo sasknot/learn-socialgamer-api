@@ -2,6 +2,12 @@ input UserListFilters {
   keyword: String
 }
 
+enum UserFriendshipStatus {
+  pending
+  accepted
+  rejected
+}
+
 
 type UserList {
   rows: [User!]!
@@ -10,12 +16,26 @@ type UserList {
 
 type User {
   id: ID!
-  avatar: Int
+  avatar: Media
   name: String!
   email: String!
   birthday: Date!
   location: String
   description: String
+  created_at: Date
+  updated_at: Date
+
+  friends: [UserFriend!]
+  games: [Game!]
+  consoles: [Console!]
+  game_ratings: [GameRating!]
+  game_comments: [GameRating!]
+}
+
+type UserFriend {
+  user: User!
+  friend: User!
+  status: UserFriendshipStatus!
   created_at: Date
   updated_at: Date
 }

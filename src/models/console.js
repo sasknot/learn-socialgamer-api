@@ -1,8 +1,8 @@
-const { CommomModel, CommomCollection } = require('./_commom')
+const { CommonModel, CommonCollection } = require('./_common')
 const { UserModel } = require('./user')
 const { GameModel } = require('./game')
 
-const ConsoleModel = CommomModel.extend({
+const ConsoleModel = CommonModel.extend({
   tableName: 'console',
 
   users () {
@@ -14,7 +14,7 @@ const ConsoleModel = CommomModel.extend({
   }
 })
 
-const ConsoleCollection = CommomCollection.extend({
+const ConsoleCollection = CommonCollection.extend({
   get model() {
     return ConsoleModel
   }

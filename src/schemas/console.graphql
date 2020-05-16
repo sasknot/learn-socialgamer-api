@@ -1,0 +1,21 @@
+input ConsoleListFilters {
+  keyword: String
+}
+
+
+type ConsoleList {
+  rows: [Console!]!
+  paging: Paging
+}
+
+type Console {
+  id: ID!
+  name: String!
+  release_date: Date!
+  description: String
+  created_at: Date
+  updated_at: Date
+
+  games: [Game!]
+  users: [User!]
+}
