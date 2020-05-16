@@ -2,6 +2,49 @@ input UserListFilters {
   keyword: String
 }
 
+input UserDataInsert {
+  avatar: Media
+  name: String!
+  email: String!
+  password: String!
+  birthday: Date!
+  location: String
+  description: String
+}
+
+input UserDataUpdate {
+  avatar: Media
+  name: String!
+  email: String!
+  birthday: Date!
+  location: String
+  description: String
+}
+
+input UserDataPassword {
+  password: String!
+}
+
+input UserFriendDataInsert {
+  user: ID!
+  friend: ID!
+}
+
+input UserFriendDataUpdate {
+  id: ID!
+  status: String!
+}
+
+input UserGameData {
+  user: ID!
+  game: ID!
+}
+
+input UserConsoleData {
+  user: ID!
+  console: ID!
+}
+
 enum UserFriendshipStatus {
   pending
   accepted

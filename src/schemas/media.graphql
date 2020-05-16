@@ -1,3 +1,11 @@
+input MediaData {
+  filename: String!
+  url: String!
+  mimetype: String
+  kb_size: Int
+}
+
+
 type Media {
   id: ID!
   filename: String!

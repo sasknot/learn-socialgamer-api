@@ -2,6 +2,25 @@ input GameListFilters {
   keyword: String
 }
 
+input GameData {
+  cover: Media
+  name: String!
+  release_date: Date
+  description: String
+}
+
+input GameRatingData {
+  user: ID!
+  game: ID!
+  number: Int!
+}
+
+input GameCommentData {
+  user: ID!
+  game: ID!
+  message: String!
+}
+
 
 type GameList {
   rows: [Game!]!

@@ -17,9 +17,30 @@ type Query {
 }
 
 type Mutation {
-  userInsert()
-  userUpdate()
-  userDestroy(id: ID)
+  mediaInsert(data: MediaData!): Media
+  mediaDestroy(id: ID!): Boolean
 
+  userInsert(data: UserDataInsert!): User!
+  userUpdate(data: UserDataUpdate!): User!
+  userPassword(data: UserDataPassword!): Boolean!
+  userDestroy(id: ID!): Boolean!
+  userFriendInsert(data: UserFriendDataInsert!): UserFriend!
+  userFriendUpdate(data: UserFriendDataUpdate!): UserFriend!
+  userFriendDestroy(id: ID!): Boolean!
+  userGameInsert(data: UserGameData!): User!
+  userGameDestroy(id: ID!): Boolean!
+  userConsoleInsert(data: UserConsoleData!): User!
+  userConsoleDestroy(id: ID!): Boolean!
 
+  gameInsert(data: GameData!): Game!
+  gameUpdate(data: GameData!): Game!
+  gameDestroy(id: ID!): Boolean
+  gameRatingInsert(data: GameRatingData!): GameRating!
+  gameRatingDestroy(id: ID!): Boolean
+  gameCommentInsert(data: GameCommentData!): GameComment!
+  gameCommentDestroy(id: ID!): Boolean
+
+  consoleInsert(data: ConsoleData!): Console!
+  consoleUpdate(data: ConsoleData!): Console!
+  consoleDestroy(id: ID!): Boolean
 }

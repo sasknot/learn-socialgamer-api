@@ -31,7 +31,6 @@ It can be seen [here](http://sasknot.github.io/learn-socialgamer-api/)
 
 ## TODO
 
-* Add more GraphQL schemas and queries
 * Add tests for GraphQL queries
 * Persist relationships
 * Persist game rating
