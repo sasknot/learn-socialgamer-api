@@ -1,4 +1,6 @@
 {
+  "jwtSecret": "123456",
+
   "database": {
     "client": "sqlite3",
     "connection": {

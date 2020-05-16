@@ -6,6 +6,8 @@ const requestUtils = {
     if (!context.user && !context.token) {
       throw new AuthenticationError
     }
+
+    return true
   },
 
   getParams (params) {
