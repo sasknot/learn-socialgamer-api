@@ -4,7 +4,7 @@ input UserListFilters {
 
 
 type UserList {
-  list: [User!]!
+  rows: [User!]!
   paging: Paging
 }
 
@@ -13,7 +13,6 @@ type User {
   avatar: Int
   name: String!
   email: String!
-  password: String
   birthday: Date!
   location: String
   description: String
