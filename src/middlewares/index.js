@@ -1,13 +1,19 @@
-const { compression, json, urlencoded } = require('./basics')
+const {
+  compression,
+  json,
+  urlencoded
+} = require('./basics')
 const graphql = require('./graphql')
-const notFound = require('./not-found')
-const error = require('./error')
+const {
+  routeNotFound,
+  routeError
+} = require('./route-handlers')
 
 module.exports = {
   compression,
   json,
   urlencoded,
   graphql,
-  notFound,
-  error
+  routeNotFound,
+  routeError
 }

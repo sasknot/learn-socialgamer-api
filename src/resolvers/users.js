@@ -1,32 +1,10 @@
 const { UserModel, UserCollection } = require('../models/user');
-
-const getParams = (params) => {
-  const output = {}
-
-  for (const [key, value] of Object.entries(params)) {
-    if (
-      value !== null
-      && value !== undefined
-      && value !== {}
-      && value !== []
-      && value !== ''
-    ) {
-      output[key] = value
-    }
-  }
-
-  return output
-}
-
-const getId = (params) => {
-  const id = +params.id || null
-  return id
-}
+const { requestUtils } = require('../helpers')
 
 module.exports = {
   Query: {
     async userList (root, args, context) {
-      const params = getParams(args)
+      const params = requestUtils.getParams(args)
       const result = await UserCollection.findWithPaging(params)
       const output = result.outputWithPaging()
 
@@ -34,7 +12,7 @@ module.exports = {
     },
 
     async userGet (root, args, context) {
-      const id = getId(args)
+      const id = requestUtils.getId(args)
       const result = await UserModel.find({ id })
       const output = result.output()
 
