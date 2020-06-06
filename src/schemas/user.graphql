@@ -2,7 +2,7 @@ input UserListFilters {
   keyword: String
 }
 
-input UserDataInsert {
+input UserDataCreate {
   avatar: MediaData
   name: String!
   email: String!
@@ -25,7 +25,7 @@ input UserDataPassword {
   password: String!
 }
 
-input UserFriendDataInsert {
+input UserFriendDataCreate {
   user: ID!
   friend: ID!
 }

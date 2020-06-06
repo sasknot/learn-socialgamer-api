@@ -7,40 +7,40 @@ scalar Date
 
 type Query {
   userList(page: Int, pageSize: Int, filters: UserListFilters): UserList!
-  userGet(id: ID): User
+  userRead(id: ID): User
 
   gameList(page: Int, pageSize: Int, filters: GameListFilters): GameList!
-  gameGet(id: ID): Game
+  gameRead(id: ID): Game
 
   consoleList(page: Int, pageSize: Int, filters: ConsoleListFilters): ConsoleList!
-  consoleGet(id: ID): Console
+  consoleRead(id: ID): Console
 }
 
 type Mutation {
-  mediaInsert(data: MediaData!): Media
+  mediaCreate(data: MediaData!): Media
   mediaDestroy(id: ID!): Boolean
 
-  userInsert(data: UserDataInsert!): User!
+  userCreate(data: UserDataCreate!): User!
   userUpdate(data: UserDataUpdate!): User!
   userPassword(data: UserDataPassword!): Boolean!
   userDestroy(id: ID!): Boolean!
-  userFriendInsert(data: UserFriendDataInsert!): UserFriend!
+  userFriendCreate(data: UserFriendDataCreate!): UserFriend!
   userFriendUpdate(data: UserFriendDataUpdate!): UserFriend!
   userFriendDestroy(id: ID!): Boolean!
-  userGameInsert(data: UserGameData!): User!
+  userGameCreate(data: UserGameData!): User!
   userGameDestroy(id: ID!): Boolean!
-  userConsoleInsert(data: UserConsoleData!): User!
+  userConsoleCreate(data: UserConsoleData!): User!
   userConsoleDestroy(id: ID!): Boolean!
 
-  gameInsert(data: GameData!): Game!
+  gameCreate(data: GameData!): Game!
   gameUpdate(data: GameData!): Game!
   gameDestroy(id: ID!): Boolean
-  gameRatingInsert(data: GameRatingData!): GameRating!
+  gameRatingCreate(data: GameRatingData!): GameRating!
   gameRatingDestroy(id: ID!): Boolean
-  gameCommentInsert(data: GameCommentData!): GameComment!
+  gameCommentCreate(data: GameCommentData!): GameComment!
   gameCommentDestroy(id: ID!): Boolean
 
-  consoleInsert(data: ConsoleData!): Console!
+  consoleCreate(data: ConsoleData!): Console!
   consoleUpdate(data: ConsoleData!): Console!
   consoleDestroy(id: ID!): Boolean
 }

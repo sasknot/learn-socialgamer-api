@@ -11,7 +11,7 @@ module.exports = {
       return output
     },
 
-    async userGet (root, args, context) {
+    async userRead (root, args, context) {
       const id = requestUtils.getId(args)
       const result = await UserModel.find({ id })
       const output = result.output()
