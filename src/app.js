@@ -7,7 +7,7 @@ const app = express()
 
 // Index route
 app.get('/', function(req, res) {
-  res.send('OK')
+  res.send('See at /graphql')
 })
 
 // Middlewares

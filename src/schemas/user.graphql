@@ -3,7 +3,7 @@ input UserListFilters {
 }
 
 input UserDataInsert {
-  avatar: Media
+  avatar: MediaData
   name: String!
   email: String!
   password: String!
@@ -13,7 +13,7 @@ input UserDataInsert {
 }
 
 input UserDataUpdate {
-  avatar: Media
+  avatar: MediaData
   name: String!
   email: String!
   birthday: Date!

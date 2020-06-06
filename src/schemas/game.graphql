@@ -3,7 +3,7 @@ input GameListFilters {
 }
 
 input GameData {
-  cover: Media
+  cover: MediaData
   name: String!
   release_date: Date
   description: String
