@@ -5,16 +5,16 @@
   "private": true,
   "scripts": {
     "postinstall": "npm run migrate && npm run seed",
-    "start": "npx pm2 start ./src/server.js --name socialgamer-api --watch",
-    "stop": "npx pm2 stop socialgamer-api",
-    "dev": "npm start && npx pm2 logs",
-    "docs": "npx apidoc -i src/routes/ -o docs/",
-    "test": "NODE_ENV=test npx jest",
-    "migrate": "npx knex migrate:latest",
-    "migrate:rollback": "npx knex migrate:rollback",
-    "migrate:make": "npx knex migrate:make",
-    "seed": "npx knex seed:run",
-    "seed:make": "npx knex seed:make"
+    "start": "pm2 start pm2.config.js",
+    "stop": "pm2 stop socialgamer-api",
+    "dev": "npm start && pm2 logs",
+    "docs": "apidoc -i src/routes/ -o docs/",
+    "test": "NODE_ENV=test jest",
+    "migrate": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback",
+    "migrate:make": "knex migrate:make",
+    "seed": "knex seed:run",
+    "seed:make": "knex seed:make"
   },
   "repository": {
     "type": "git",
