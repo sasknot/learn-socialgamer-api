@@ -42,8 +42,9 @@ It can be seen [here](http://sasknot.github.io/learn-socialgamer-api/)
 
 ## TODO
 
-* Add tests for GraphQL queries
-* Persist relationships
+* Add more GraphQL queries and mutations
+* Add tests for GraphQL queries and mutations
+* Persist relationships (what will be the names?)
 * Persist game rating
 * Persist media
 * Change apiDoc to JSDoc

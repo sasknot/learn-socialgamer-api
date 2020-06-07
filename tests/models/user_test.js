@@ -1,4 +1,5 @@
 const helper = require('../helper')
+const { NotFoundError } = require('../../src/errors')
 const { UserModel } = require('../../src/models/user')
 
 beforeAll(async () => {
@@ -15,7 +16,7 @@ describe('models/user', () => {
       location: "Europe",
       description: "Hello"
     }
-    const result = await UserModel.forge().save(data)
+    const result = await UserModel.create(data)
     const output = result.output()
 
     delete data.password
@@ -24,44 +25,39 @@ describe('models/user', () => {
   })
 
   test('update', async () => {
-    const result = await UserModel.forge({ id: 1 }).save({ name: 'Luther Blissett' })
+    const result = await UserModel.update({ id: 1 }, { name: 'Luther Blissett' })
     const output = result.output()
 
     expect(output.name).toEqual('Luther Blissett')
   })
 
   test('destroy', async () => {
-    const result = await UserModel.forge({ id: 1 }).destroy()
-    const output = result.output()
+    const result = await UserModel.destroy({ id: 1 })
 
-    expect(output).toEqual(expect.anything())
+    expect(result).toBe(true)
   })
 
-  test('not insert', async () => {
+  test('not create', async () => {
     const data = {}
     const result = async () => {
-      await UserModel.forge().save(data)
+      await UserModel.create(data)
     }
 
     expect(result).rejects.toThrow()
   })
 
   test('not update', async () => {
-    const lastId = await UserModel.findLastId()
     const result = async () => {
-      await UserModel.forge({ id: (lastId+1) }).save({ name: 'Luther Blissett' })
+      await UserModel.update({ id: 999 }, { name: 'Luther Blissett' })
     }
 
-    expect(result).rejects.toThrow(UserModel.NoRowsUpdatedError)
+    expect(result).rejects.toThrow(NotFoundError)
   })
 
   test('not destroy', async () => {
-    const lastId = await UserModel.findLastId()
-    const result = async () => {
-      await UserModel.forge({ id: (lastId+1) }).destroy()
-    }
+    const result = await UserModel.destroy({ id: 999 })
 
-    expect(result).rejects.toThrow(UserModel.NoRowsDeletedError)
+    expect(result).toBe(false)
   })
 })
 

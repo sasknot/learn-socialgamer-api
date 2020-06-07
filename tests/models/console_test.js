@@ -1,4 +1,5 @@
 const helper = require('../helper')
+const { NotFoundError } = require('../../src/errors')
 const { ConsoleModel } = require('../../src/models/console')
 
 beforeAll(async () => {
@@ -6,59 +7,52 @@ beforeAll(async () => {
 })
 
 describe('models/console', () => {
-  test('insert', async () => {
+  test('create', async () => {
     const data = {
       name: "Wii U",
       release_date: "2012-11-18",
       description: "The Wii U is a home video game console developed by Nintendo as the successor to the Wii. Released in late 2012, it is the first eighth-generation video game console and competed with Microsoft's Xbox One and Sony's PlayStation 4."
     }
-    const result = await ConsoleModel.forge().save(data)
+    const result = await ConsoleModel.create(data)
     const output = result.output()
-
-    delete data.password
 
     expect(output).toMatchObject(data)
   })
 
   test('update', async () => {
-    const result = await ConsoleModel.forge({ id: 1 }).save({ name: 'Switch' })
+    const result = await ConsoleModel.update({ id: 1 }, { name: 'Switch' })
     const output = result.output()
 
     expect(output.name).toEqual('Switch')
   })
 
   test('destroy', async () => {
-    const result = await ConsoleModel.forge({ id: 1 }).destroy()
-    const output = result.output()
+    const result = await ConsoleModel.destroy({ id: 1 })
 
-    expect(output).toEqual(expect.anything())
+    expect(result).toBe(true)
   })
 
-  test('not insert', async () => {
+  test('not create', async () => {
     const data = {}
     const result = async () => {
-      await ConsoleModel.forge().save(data)
+      await ConsoleModel.create(data)
     }
 
     expect(result).rejects.toThrow()
   })
 
   test('not update', async () => {
-    const lastId = await ConsoleModel.findLastId()
     const result = async () => {
-      await ConsoleModel.forge({ id: (lastId+1) }).save({ name: 'Switch' })
+      await ConsoleModel.update({ id: 999 }, { name: 'Switch' })
     }
 
-    expect(result).rejects.toThrow(ConsoleModel.NoRowsUpdatedError)
+    expect(result).rejects.toThrow(NotFoundError)
   })
 
   test('not destroy', async () => {
-    const lastId = await ConsoleModel.findLastId()
-    const result = async () => {
-      await ConsoleModel.forge({ id: (lastId+1) }).destroy()
-    }
+    const result = await ConsoleModel.destroy({ id: 999 })
 
-    expect(result).rejects.toThrow(ConsoleModel.NoRowsDeletedError)
+    expect(result).toBe(false)
   })
 })
 
