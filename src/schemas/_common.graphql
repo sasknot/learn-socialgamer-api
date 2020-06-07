@@ -8,13 +8,13 @@ type Paging {
 scalar Date
 
 type Query {
-  userList(page: Int, pageSize: Int, filters: UserListFilters): UserList!
+  userList(page: Int, size: Int, filters: UserListFilters): UserList!
   userRead(id: ID): User
 
-  # gameList(page: Int, pageSize: Int, filters: GameListFilters): GameList!
+  # gameList(page: Int, size: Int, filters: GameListFilters): GameList!
   # gameRead(id: ID): Game
 
-  # consoleList(page: Int, pageSize: Int, filters: ConsoleListFilters): ConsoleList!
+  # consoleList(page: Int, size: Int, filters: ConsoleListFilters): ConsoleList!
   # consoleRead(id: ID): Console
 }
 

@@ -74,14 +74,14 @@ const CommonCollection = database.Collection.extend({
     }
   }
 }, {
-  findWithPaging ({ page = 1, pageSize = 10, where = {}, order = [{ column: 'id', order: 'desc' }] }) {
+  findWithPaging ({ page = 1, size = 10, where = {}, order = [{ column: 'id', order: 'desc' }] }) {
     return this
     .forge()
     .where(where)
     .query('orderBy', order)
     .fetchPage({
       page,
-      pageSize
+      pageSize: size
     })
   }
 })
