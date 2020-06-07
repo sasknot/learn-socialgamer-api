@@ -4,16 +4,32 @@ const {
   UserInputError
 } = require('apollo-server')
 
-const InternalError = (message) => {
-  const output = new Error(message)
-  output.name = 'InternalError'
+class InternalError extends Error {
+  constructor (message) {
+    super(message)
+    this.name = 'InternalError'
+  }
+}
 
-  return output
+class NotFoundError extends Error {
+  constructor (message) {
+    super(message)
+    this.name = 'NotFoundError'
+  }
+}
+
+class EmptyResponseOutput extends Error {
+  constructor (message) {
+    super(message)
+    this.name = 'EmptyResponseOutput'
+  }
 }
 
 module.exports = {
   AuthenticationError,
   ForbiddenError,
   UserInputError,
-  InternalError
+  InternalError,
+  NotFoundError,
+  EmptyResponseOutput
 }

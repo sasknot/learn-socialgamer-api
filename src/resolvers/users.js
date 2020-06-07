@@ -6,43 +6,45 @@ module.exports = {
     async userList (root, args, context) {
       const params = requestUtils.getParams(args)
       const result = await UserCollection.findWithPaging(params)
-      const output = result.outputWithPaging()
+      const output = result.output()
 
       return output
     },
 
     async userRead (root, args, context) {
       const id = requestUtils.getId(args)
-      const result = await UserModel.find({ id })
+      const result = await UserModel.find({ id }, {
+        withRelated: UserModel.relations
+      })
       const output = result.output()
 
-      return output
+      return requestUtils.mustReturn(output)
     }
   },
 
-  // Mutation: {
-  //   async userInsert (root, args, context) {
-  //     const { req } = context
-  //     const result = await UserModel.forge().save(req.body)
-  //     const output = result.output()
+  Mutation: {
+    async userCreate (root, args, context) {
+      const { data } = args
+      const result = await UserModel.create(data)
+      const output = result.output()
 
-  //     return output
-  //   },
+      return output
+    },
 
-  //   async userUpdate (root, args, context) {
-  //     const { req } = context
-  //     const result = await UserModel.forge({ id: req.params.id }).save(req.body)
-  //     const output = result.output()
+    async userUpdate (root, args, context) {
+      const id = requestUtils.getId(args)
+      const { data } = args
+      const result = await UserModel.update({ id }, data)
+      const output = result.output()
 
-  //     return output
-  //   },
+      return output
+    },
 
-  //   async userDestroy (root, args, context) {
-  //     const { req } = context
-  //     const result = await UserModel.forge({ id: req.params.id }).destroy()
-  //     const output = result.output()
+    async userDestroy (root, args, context) {
+      const id = requestUtils.getId(args)
+      const result = await UserModel.destroy({ id })
 
-  //     return output
-  //   }
-  // }
+      return result
+    }
+  }
 }

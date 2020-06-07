@@ -1,6 +1,8 @@
 type Paging {
   page: Int!
-  pageSize: Int!
+  total: Int!
+  size: Int!
+  count: Int!
 }
 
 scalar Date
@@ -9,38 +11,38 @@ type Query {
   userList(page: Int, pageSize: Int, filters: UserListFilters): UserList!
   userRead(id: ID): User
 
-  gameList(page: Int, pageSize: Int, filters: GameListFilters): GameList!
-  gameRead(id: ID): Game
+  # gameList(page: Int, pageSize: Int, filters: GameListFilters): GameList!
+  # gameRead(id: ID): Game
 
-  consoleList(page: Int, pageSize: Int, filters: ConsoleListFilters): ConsoleList!
-  consoleRead(id: ID): Console
+  # consoleList(page: Int, pageSize: Int, filters: ConsoleListFilters): ConsoleList!
+  # consoleRead(id: ID): Console
 }
 
 type Mutation {
-  mediaCreate(data: MediaData!): Media
-  mediaDestroy(id: ID!): Boolean
+#   mediaCreate(data: MediaData!): Media
+#   mediaDestroy(id: ID!): Boolean
 
   userCreate(data: UserDataCreate!): User!
-  userUpdate(data: UserDataUpdate!): User!
-  userPassword(data: UserDataPassword!): Boolean!
+  userUpdate(id: ID!, data: UserDataUpdate!): User!
+#   userPassword(data: UserDataPassword!): Boolean!
   userDestroy(id: ID!): Boolean!
-  userFriendCreate(data: UserFriendDataCreate!): UserFriend!
-  userFriendUpdate(data: UserFriendDataUpdate!): UserFriend!
-  userFriendDestroy(id: ID!): Boolean!
-  userGameCreate(data: UserGameData!): User!
-  userGameDestroy(id: ID!): Boolean!
-  userConsoleCreate(data: UserConsoleData!): User!
-  userConsoleDestroy(id: ID!): Boolean!
+#   userFriendCreate(data: UserFriendDataCreate!): UserFriend!
+#   userFriendUpdate(data: UserFriendDataUpdate!): UserFriend!
+#   userFriendDestroy(id: ID!): Boolean!
+#   userGameCreate(data: UserGameData!): User!
+#   userGameDestroy(id: ID!): Boolean!
+#   userConsoleCreate(data: UserConsoleData!): User!
+#   userConsoleDestroy(id: ID!): Boolean!
 
-  gameCreate(data: GameData!): Game!
-  gameUpdate(data: GameData!): Game!
-  gameDestroy(id: ID!): Boolean
-  gameRatingCreate(data: GameRatingData!): GameRating!
-  gameRatingDestroy(id: ID!): Boolean
-  gameCommentCreate(data: GameCommentData!): GameComment!
-  gameCommentDestroy(id: ID!): Boolean
+#   gameCreate(data: GameData!): Game!
+#   gameUpdate(data: GameData!): Game!
+#   gameDestroy(id: ID!): Boolean
+#   gameRatingCreate(data: GameRatingData!): GameRating!
+#   gameRatingDestroy(id: ID!): Boolean
+#   gameCommentCreate(data: GameCommentData!): GameComment!
+#   gameCommentDestroy(id: ID!): Boolean
 
-  consoleCreate(data: ConsoleData!): Console!
-  consoleUpdate(data: ConsoleData!): Console!
-  consoleDestroy(id: ID!): Boolean
+#   consoleCreate(data: ConsoleData!): Console!
+#   consoleUpdate(data: ConsoleData!): Console!
+#   consoleDestroy(id: ID!): Boolean
 }

@@ -5,6 +5,7 @@ const { ConsoleModel } = require('./console')
 const UserModel = CommonModel.extend({
   tableName: 'user',
   hidden: ['password'],
+  relations: ['games', 'consoles'],
 
   games () {
     return this.belongsToMany(GameModel, 'user_games', 'user', 'game')

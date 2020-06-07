@@ -3,8 +3,8 @@ const { loadFiles } = require('@graphql-toolkit/file-loading')
 const { ApolloServer } = require('apollo-server')
 
 // const { UserModel } = require('../models/user')
-const typeDefs = loadFiles(path.join(__dirname, '..', 'schemas', '**/*.graphql'))
-const resolvers = loadFiles(path.join(__dirname, '..', 'resolvers', '**/*.js'))
+const typeDefs = loadFiles(path.join(__dirname, '..', 'schemas', '**', '*.graphql'))
+const resolvers = loadFiles(path.join(__dirname, '..', 'resolvers', '**', '*.js'))
 
 const context = ({ req }) => {
   const output = { req }

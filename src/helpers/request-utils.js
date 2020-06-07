@@ -1,5 +1,6 @@
+const _ = require('lodash')
 const { UserModel } = require('../models/user')
-const { AuthenticationError } = require('../errors')
+const { AuthenticationError, EmptyResponseOutput } = require('../errors')
 
 const requestUtils = {
   requireAuth (context) {
@@ -30,7 +31,19 @@ const requestUtils = {
 
   getId (params) {
     const id = +params.id || null
+
+    if (!id) throw new Error('Empty id')
+    if (isNaN(id)) throw new Error('NaN id')
+
     return id
+  },
+
+  mustReturn (output) {
+    if (_.isEmpty(output)) {
+      throw new EmptyResponseOutput('Request must return an output')
+    }
+
+    return output
   }
 }
 

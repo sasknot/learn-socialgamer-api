@@ -14,9 +14,9 @@ input UserDataCreate {
 
 input UserDataUpdate {
   avatar: MediaData
-  name: String!
-  email: String!
-  birthday: Date!
+  name: String
+  email: String
+  birthday: Date
   location: String
   description: String
 }

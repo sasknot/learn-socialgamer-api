@@ -11,7 +11,7 @@ module.exports = {
     wait_ready: true,
     listen_timeout: 3000,
     kill_timeout: 60000,
-    restart_delay: 1000,
+    restart_delay: 2000,
     max_restarts: 10
   }]
 }
