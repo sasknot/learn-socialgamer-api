@@ -1,11 +1,13 @@
-const { UserModel, UserCollection } = require('../models/user');
+const { UserModel, UserCollection } = require('../models/user')
 const { requestUtils } = require('../helpers')
 
 module.exports = {
   Query: {
     async userList (root, args, context) {
-      const params = requestUtils.getParams(args)
-      const result = await UserCollection.findWithPaging(params)
+      const { page, size } = args
+      const result = await UserCollection.findWithPaging(page, size, {
+        withRelated: UserModel.relations
+      })
       const output = result.output()
 
       return output

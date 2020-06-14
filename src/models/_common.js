@@ -1,5 +1,9 @@
-const database = require('../services/database')
+const knex = require('knex')
+const bookshelf = require('bookshelf')
+const config = require('../../knexfile')
 const { NotFoundError } = require('../errors')
+
+const database = bookshelf(knex(config))
 
 const CommonModel = database.Model.extend({
   hasTimestamps: true,
@@ -74,15 +78,19 @@ const CommonCollection = database.Collection.extend({
     }
   }
 }, {
-  findWithPaging ({ page = 1, size = 10, where = {}, order = [{ column: 'id', order: 'desc' }] }) {
-    return this
-    .forge()
-    .where(where)
-    .query('orderBy', order)
-    .fetchPage({
+  findWithPaging (page = 1, size = 10, options = {}) {
+    const fetchOptions = {
       page,
       pageSize: size
-    })
+    }
+    options.where = options.where || {}
+    options.order = options.order || [{ column: 'id', order: 'desc' }]
+
+    return this
+    .forge()
+    .where(options.where)
+    .query('orderBy', options.order)
+    .fetchPage(fetchOptions)
   }
 })
 

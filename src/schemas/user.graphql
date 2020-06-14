@@ -76,6 +76,7 @@ type User {
 }
 
 type UserFriend {
+  id: ID!
   user: User!
   friend: User!
   status: UserFriendshipStatus!

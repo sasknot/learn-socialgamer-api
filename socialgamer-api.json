@@ -1,39 +1,42 @@
 {
+  "port": 8000,
+  "port_test": 8001,
   "jwtSecret": "123456",
 
   "database": {
-    "client": "sqlite3",
-    "connection": {
-      "filename": "./db.sqlite"
+    "dev": {
+      "client": "sqlite3",
+      "connection": {
+        "filename": "./db.sqlite"
+      },
+      "useNullAsDefault": true,
+      "pool": {
+        "min": 2,
+        "max": 10
+      },
+      "migrations": {
+        "tableName": "migrations"
+      },
+      "seeds": {
+        "directory": "./seeds"
+      }
     },
-    "useNullAsDefault": true,
-    "pool": {
-      "min": 2,
-      "max": 10
-    },
-    "migrations": {
-      "tableName": "migrations"
-    },
-    "seeds": {
-      "directory": "./seeds"
-    }
-  },
-
-  "database_test": {
-    "client": "sqlite3",
-    "connection": {
-      "filename": "./db-test.sqlite"
-    },
-    "useNullAsDefault": true,
-    "pool": {
-      "min": 2,
-      "max": 10
-    },
-    "migrations": {
-      "tableName": "migrations"
-    },
-    "seeds": {
-      "directory": "./seeds"
+    "test": {
+      "client": "sqlite3",
+      "connection": {
+        "filename": "./db-test.sqlite"
+      },
+      "useNullAsDefault": true,
+      "pool": {
+        "min": 2,
+        "max": 10
+      },
+      "migrations": {
+        "tableName": "migrations"
+      },
+      "seeds": {
+        "directory": "./seeds"
+      }
     }
   }
 }
