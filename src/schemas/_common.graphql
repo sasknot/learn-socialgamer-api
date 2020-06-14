@@ -11,8 +11,8 @@ type Query {
   userList(page: Int, size: Int, filters: UserListFilters): UserList!
   userRead(id: ID): User
 
-  # gameList(page: Int, size: Int, filters: GameListFilters): GameList!
-  # gameRead(id: ID): Game
+  gameList(page: Int, size: Int, filters: GameListFilters): GameList!
+  gameRead(id: ID): Game
 
   # consoleList(page: Int, size: Int, filters: ConsoleListFilters): ConsoleList!
   # consoleRead(id: ID): Console
@@ -34,9 +34,9 @@ type Mutation {
 #   userConsoleCreate(data: UserConsoleData!): User!
 #   userConsoleDestroy(id: ID!): Boolean!
 
-#   gameCreate(data: GameData!): Game!
-#   gameUpdate(data: GameData!): Game!
-#   gameDestroy(id: ID!): Boolean
+  gameCreate(data: GameData!): Game!
+  gameUpdate(id: ID!, data: GameData!): Game!
+  gameDestroy(id: ID!): Boolean
 #   gameRatingCreate(data: GameRatingData!): GameRating!
 #   gameRatingDestroy(id: ID!): Boolean
 #   gameCommentCreate(data: GameCommentData!): GameComment!

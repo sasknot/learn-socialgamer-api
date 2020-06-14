@@ -4,6 +4,10 @@ beforeAll(() => {
   this.data = { user: { id: 1 } }
 })
 
+afterAll(() => {
+  delete this.data
+})
+
 describe('helpers/requestUtils', () => {
   test('requireAuth', () => {
     const userToken = token.encode(this.data)

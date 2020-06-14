@@ -33,12 +33,12 @@ class App {
   }
 
   async start (port = DEFAULT_PORT) {
+    this.isRunning = true
     console.log('[APP] Starting...')
     await this.serve(port)
 
     await sleep(1000)
     console.log('[APP] Started!')
-    return true
   }
 
   async serve (port = DEFAULT_PORT) {
@@ -97,7 +97,6 @@ class App {
 
     await sleep(1000)
     console.log('[APP] Stopped!')
-    return true
   }
 }
 

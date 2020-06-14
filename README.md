@@ -47,4 +47,5 @@ It can be seen [here](http://sasknot.github.io/learn-socialgamer-api/)
 * Persist game rating
 * Persist media
 * Change apiDoc to JSDoc
+* Jest  with global setup/teardown does not hangs only with `--forceExit`. Why?
 * Should still use `routes`?

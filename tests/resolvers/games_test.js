@@ -3,31 +3,26 @@ const apollo = require('../apollo')
 
 const fields = `
   id
-  avatar {
+  cover {
     id
     filename
     url
   }
   name
-  email
-  birthday
-  location
+  release_date
   description
   created_at
   updated_at
-  friends {
+  ratings {
     id
   }
-  games {
+  comments {
     id
   }
   consoles {
     id
   }
-  game_ratings {
-    id
-  }
-  game_comments {
+  users {
     id
   }
 `
@@ -41,62 +36,60 @@ afterAll(() => {
   delete this.connection
 })
 
-describe('resolvers/users', () => {
-  test('userCreate', async () => {
+describe('resolvers/games', () => {
+  test('gameCreate', async () => {
     const data = {
-      name: "Netochka Nezvanova",
-      email: "netochka.nezvanova@gmail.com",
-      password: "123456",
-      birthday: "1988-01-01",
-      location: "Europe",
-      description: "Hello"
+      cover: 1,
+      name: "Death Stranding",
+      release_date: "2019-11-08",
+      description: "Death Stranding is an action game developed by Kojima Productions. It is the first game from director Hideo Kojima and Kojima Productions after their disbandment from Konami in 2015."
     }
     const { data: result } = await this.connection.mutate({
-      name: 'userCreate',
+      name: 'gameCreate',
       input: { data },
       fields
     })
 
     delete data.password
 
-    expect(result.userCreate).toMatchObject(data)
+    expect(result.gameCreate).toMatchObject(data)
   })
 
-  test('userRead', async () => {
+  test('gameRead', async () => {
     const { data: result } = await this.connection.query({
-      name: 'userRead',
+      name: 'gameRead',
       input: { id: 1 },
       fields
     })
 
-    expect(result.userRead).toHaveProperties(helper.properties['user'])
+    expect(result.gameRead).toHaveProperties(TestHelper.properties['user'])
   })
 
-  test('userUpdate', async () => {
+  test('gameUpdate', async () => {
     const data = {
-      name: 'Luther Blissett'
+      name: 'Resident Evil 3'
     }
     const { data: result } = await this.connection.mutate({
-      name: 'userUpdate',
+      name: 'gameUpdate',
       input: { id: 1, data },
       fields
     })
 
-    expect(result.userUpdate).toMatchObject(data)
+    expect(data.gameUpdate).toMatchObject(data)
   })
 
-  test('userDestroy', async () => {
+  test('gameDestroy', async () => {
     const { data: result } = await this.connection.mutate({
-      name: 'userDestroy',
+      name: 'gameDestroy',
       input: { id: 1 }
     })
 
-    expect(result.userDestroy).toBe(true)
+    expect(result.gameDestroy).toBe(true)
   })
 
-  test('userList', async () => {
+  test('gameList', async () => {
     const { data: result } = await this.connection.query({
-      name: 'userList',
+      name: 'gameList',
       input: { page: 1, size: 10 },
       fields: `
         rows {
@@ -111,7 +104,7 @@ describe('resolvers/users', () => {
       `
     })
 
-    expect(result.userList.rows[0]).toHaveProperties(helper.properties['user'])
-    expect(result.userList.paging).toHaveProperties(helper.properties['paging'])
+    expect(result.gameList.rows[0]).toHaveProperties(helper.properties['game'])
+    expect(result.gameList.paging).toHaveProperties(helper.properties['paging'])
   })
 })

@@ -1,38 +1,33 @@
 const helper = require('../helper')
 const { NotFoundError } = require('../../src/errors')
-const { UserModel } = require('../../src/models/user')
+const { GameRatingModel } = require('../../src/models/game-rating')
 
 beforeAll(async () => {
   await helper.syncDatabase()
 })
 
-describe('models/user', () => {
+describe('models/game-rating', () => {
   test('create', async () => {
     const data = {
-      name: "Netochka Nezvanova",
-      email: "netochka.nezvanova@gmail.com",
-      password: "123456",
-      birthday: "1988-01-01",
-      location: "Europe",
-      description: "Hello"
+      user: 1,
+      game: 1,
+      number: 3
     }
-    const result = await UserModel.create(data)
+    const result = await GameRatingModel.create(data)
     const output = result.output()
-
-    delete data.password
 
     expect(output).toMatchObject(data)
   })
 
   test('update', async () => {
-    const result = await UserModel.update({ id: 1 }, { name: 'Luther Blissett' })
+    const result = await GameRatingModel.update({ id: 1 }, { number: 5 })
     const output = result.output()
 
-    expect(output.name).toEqual('Luther Blissett')
+    expect(output.number).toEqual(5)
   })
 
   test('destroy', async () => {
-    const result = await UserModel.destroy({ id: 1 })
+    const result = await GameRatingModel.destroy({ id: 1 })
 
     expect(result).toBe(true)
   })
@@ -40,7 +35,7 @@ describe('models/user', () => {
   test('not create', async () => {
     const data = {}
     const result = async () => {
-      await UserModel.create(data)
+      await GameRatingModel.create(data)
     }
 
     expect(result).rejects.toThrow()
@@ -48,14 +43,14 @@ describe('models/user', () => {
 
   test('not update', async () => {
     const result = async () => {
-      await UserModel.update({ id: 999 }, { name: 'Luther Blissett' })
+      await GameRatingModel.update({ id: 999 }, { number: 5 })
     }
 
     expect(result).rejects.toThrow(NotFoundError)
   })
 
   test('not destroy', async () => {
-    const result = await UserModel.destroy({ id: 999 })
+    const result = await GameRatingModel.destroy({ id: 999 })
 
     expect(result).toBe(false)
   })

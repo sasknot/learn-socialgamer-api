@@ -7,9 +7,9 @@
     "postinstall": "npm run migrate && npm run seed",
     "start": "pm2 startOrReload pm2.config.js",
     "stop": "pm2 stop socialgamer-api",
-    "dev": "npm start && pm2 logs",
+    "dev": "NODE_ENV=dev npm start && pm2 logs",
     "docs": "apidoc -i src/routes/ -o docs/",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test PORT=8001 jest --runInBand --forceExit",
     "migrate": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback",
     "migrate:make": "knex migrate:make",
@@ -44,13 +44,18 @@
     "apollo-link-http": "^1.5.17",
     "graphql-tag": "^2.10.3",
     "jest": "^26.0.1",
-    "unfetch": "^4.1.0"
+    "unfetch": "^4.1.0",
+    "weak-napi": "^2.0.2"
   },
   "jest": {
     "verbose": true,
     "testMatch": [
       "<rootDir>/tests/**/*_test.js"
     ],
-    "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"]
+    "globalSetup": "<rootDir>/tests/global-setup.js",
+    "globalTeardown": "<rootDir>/tests/global-teardown.js",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setup.js"
+    ]
   }
 }

@@ -49,7 +49,7 @@ exports.up = function(knex) {
     });
   })
   .then(function() {
-    return knex.schema.createTable('game_comments', function(table) {
+    return knex.schema.createTable('game_comment', function(table) {
       table.increments('id');
       table.integer('user').references('id').inTable('users').notNullable();
       table.integer('game').references('id').inTable('games').notNullable();
@@ -114,7 +114,7 @@ exports.down = function(knex) {
     return knex.schema.dropTable('user');
   })
   .then(function() {
-    return knex.schema.dropTable('game_comments');
+    return knex.schema.dropTable('game_comment');
   })
   .then(function() {
     return knex.schema.dropTable('game_rating');
