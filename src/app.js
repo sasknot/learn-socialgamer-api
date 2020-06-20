@@ -34,11 +34,11 @@ class App {
 
   async start (port = DEFAULT_PORT) {
     this.isRunning = true
-    console.log('[APP] Starting...')
+    console.info('[APP] Starting...')
     await this.serve(port)
 
-    await sleep(1000)
-    console.log('[APP] Started!')
+    // await sleep(1000)
+    console.info('[APP] Started!')
   }
 
   async serve (port = DEFAULT_PORT) {
@@ -50,7 +50,7 @@ class App {
         const bind = typeof addr === 'string'
           ? `pipe ${addr}`
           : `port ${addr.port}`
-        console.log(`[SERVER] http listening on ${bind}`)
+        console.info(`[SERVER] http listening on ${bind}`)
         resolve()
       })
     })
@@ -85,7 +85,7 @@ class App {
   }
 
   async stop () {
-    console.log('[APP] Stopping...')
+    console.info('[APP] Stopping...')
 
     await new Promise((resolve, reject) => {
       this.server.close(async (error) => {
@@ -95,9 +95,9 @@ class App {
       })
     })
 
-    await sleep(1000)
-    console.log('[APP] Stopped!')
+    // await sleep(1000)
+    console.info('[APP] Stopped!')
   }
 }
 
-module.exports = new App
+module.exports = new App()

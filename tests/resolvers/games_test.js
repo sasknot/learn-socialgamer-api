@@ -3,7 +3,8 @@ const apollo = require('../apollo')
 
 const fields = `
   id
-  cover {
+  cover
+  cover_obj {
     id
     filename
     url
@@ -28,7 +29,7 @@ const fields = `
 `
 
 beforeAll(async () => {
-  await helper.syncDatabase()
+  await helper.resetDatabase()
   this.connection = new apollo('123')
 })
 
@@ -50,8 +51,6 @@ describe('resolvers/games', () => {
       fields
     })
 
-    delete data.password
-
     expect(result.gameCreate).toMatchObject(data)
   })
 
@@ -62,7 +61,7 @@ describe('resolvers/games', () => {
       fields
     })
 
-    expect(result.gameRead).toHaveProperties(TestHelper.properties['user'])
+    expect(result.gameRead).toHaveProperties(helper.properties['user'])
   })
 
   test('gameUpdate', async () => {

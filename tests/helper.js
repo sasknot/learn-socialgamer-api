@@ -9,16 +9,9 @@ class TestHelper {
   }
 
   /**
-   * Constructor
-   */
-  constructor () {
-
-  }
-
-  /**
    * Sync database
    */
-static async syncDatabase () {
+  static async resetDatabase () {
     const knex = Knex(knexConfig)
     await knex.migrate.rollback({ directory: knexConfig.migrations.directory }, true)
     await knex.migrate.latest()

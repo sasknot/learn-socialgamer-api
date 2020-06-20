@@ -7,7 +7,7 @@
     "postinstall": "npm run migrate && npm run seed",
     "start": "pm2 startOrReload pm2.config.js",
     "stop": "pm2 stop socialgamer-api",
-    "dev": "NODE_ENV=dev npm start && pm2 logs",
+    "dev": "NODE_ENV=dev npm start --no-daemon && pm2 logs",
     "docs": "apidoc -i src/routes/ -o docs/",
     "test": "NODE_ENV=test PORT=8001 jest --runInBand --forceExit",
     "migrate": "knex migrate:latest",

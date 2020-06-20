@@ -6,6 +6,10 @@ input MediaData {
 }
 
 
+type MediaList {
+  rows: [Media!]!
+}
+
 type Media {
   id: ID!
   filename: String!

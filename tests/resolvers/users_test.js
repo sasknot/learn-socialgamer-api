@@ -33,7 +33,7 @@ const fields = `
 `
 
 beforeAll(async () => {
-  await helper.syncDatabase()
+  await helper.resetDatabase()
   this.connection = new apollo('123')
 })
 

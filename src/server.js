@@ -11,7 +11,7 @@ try {
 process.send('ready')
 
 process.on('SIGINT', async function () {
-  console.log('[SERVER] SIGINT signal received')
+  console.info('[SERVER] SIGINT signal received')
 
   try {
     await app.stop()

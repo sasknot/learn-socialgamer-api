@@ -3,7 +3,7 @@ const { NotFoundError } = require('../../src/errors')
 const { UserModel } = require('../../src/models/user')
 
 beforeAll(async () => {
-  await helper.syncDatabase()
+  await helper.resetDatabase()
 })
 
 describe('models/user', () => {

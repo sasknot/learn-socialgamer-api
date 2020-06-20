@@ -3,7 +3,7 @@ const { NotFoundError } = require('../../src/errors')
 const { ConsoleModel } = require('../../src/models/console')
 
 beforeAll(async () => {
-  await helper.syncDatabase()
+  await helper.resetDatabase()
 })
 
 describe('models/console', () => {

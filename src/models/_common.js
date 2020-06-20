@@ -34,13 +34,26 @@ const CommonModel = database.Model.extend({
     return result.id
   },
 
-  async create (data) {
-    return this.forge().save(data)
+  async create (data, options = {}) {
+    options = {
+      ...options,
+      method: 'insert',
+      autoRefresh: true
+    }
+
+    return this.forge().save(data, options)
   },
 
-  async update (fields, data) {
+  async update (fields, data, options = {}) {
+    options = {
+      ...options,
+      method: 'update',
+      patch: true,
+      autoRefresh: true
+    }
+
     try {
-      const result = await this.forge(fields).save(data)
+      const result = await this.forge(fields).save(data, options)
       return result
     } catch (error) {
       if (error instanceof database.Model.NoRowsUpdatedError) {
@@ -79,17 +92,20 @@ const CommonCollection = database.Collection.extend({
   }
 }, {
   findWithPaging (page = 1, size = 10, options = {}) {
-    const fetchOptions = {
-      page,
-      pageSize: size
-    }
     options.where = options.where || {}
     options.order = options.order || [{ column: 'id', order: 'desc' }]
 
+    let { where, order, ...fetchOptions } = options
+    fetchOptions = {
+      ...fetchOptions,
+      page,
+      pageSize: size
+    }
+
     return this
     .forge()
-    .where(options.where)
-    .query('orderBy', options.order)
+    .where(where)
+    .query('orderBy', order)
     .fetchPage(fetchOptions)
   }
 })

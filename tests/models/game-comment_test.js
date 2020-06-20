@@ -3,7 +3,7 @@ const { NotFoundError } = require('../../src/errors')
 const { GameCommentModel } = require('../../src/models/game-comment')
 
 beforeAll(async () => {
-  await helper.syncDatabase()
+  await helper.resetDatabase()
 })
 
 describe('models/game-comment', () => {

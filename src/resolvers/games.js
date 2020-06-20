@@ -28,7 +28,9 @@ module.exports = {
     async gameCreate (root, args, context) {
       const { data } = args
       const result = await GameModel.create(data)
-      const output = result.output()
+      const output = (await result.fetch({
+        withRelated: GameModel.relations
+      })).output()
 
       return output
     },
@@ -37,7 +39,9 @@ module.exports = {
       const id = requestUtils.getId(args)
       const { data } = args
       const result = await GameModel.update({ id }, data)
-      const output = result.output()
+      const output = (await result.fetch({
+        withRelated: GameModel.relations
+      })).output()
 
       return output
     },
