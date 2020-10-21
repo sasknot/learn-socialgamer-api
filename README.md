@@ -42,6 +42,7 @@ It can be seen [here](http://sasknot.github.io/learn-socialgamer-api/)
 
 ## TODO
 
+* Merge web and mobile repo into this
 * Add more GraphQL queries and mutations (with tests)
 * Persist relationships (what will be the names?)
 * Persist game rating
